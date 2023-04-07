@@ -10,7 +10,15 @@ export const RQSuperHeroes = () => {
         refetchOnMount: true, // do not fetch on mount set it TRUE otherwise it wont be refresh
         refetchOnWindowFocus: true, //if you come back your tab refresh 
         refetchInterval: 12000, // refetch data as banks did for exchange rate 
-        refetchIntervalInBackground: true,// refetch data even it works in background
+        refetchIntervalInBackground: true,// refetch data even it works in background,
+        onSuccess: (data) => console.log("On success message:", data), // callback func on success
+        onError: (err) => console.log("On error message", err), // callback func on error
+        select: (data) => {// in order to change data 
+            const superHeroNames = data.data.map((hero: { name: string }) => hero.name)
+            return superHeroNames;
+        }
+
+
     })
 
     console.log("isLoading", isLoading, "isFetching", isFetching)
@@ -26,9 +34,12 @@ export const RQSuperHeroes = () => {
         <>
             <h2>RQ SUPER HEROES</h2>
             <button onClick={() => refetch()}>Fetch heroes</button>
-            {data?.data.map((d: any) => {
-                return <div key={d.name}>{d.name}</div>
-            })}
+            {/* {data?.data?.map((d: any) => {
+                return <div key={d}>{d}</div>
+            })} */}
+            {
+                (data as any)?.map?.((d: any) => <div key={d}>{d}</div>)
+            }
         </>
 
     );
