@@ -16,7 +16,8 @@ export const RQSuperHeroes = () => {
         select: (data) => {// in order to change data 
             const superHeroNames = data.data.map((hero: { name: string }) => hero.name)
             return superHeroNames;
-        }
+        },
+
 
 
     })
